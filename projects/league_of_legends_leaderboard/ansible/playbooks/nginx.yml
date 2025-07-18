@@ -1,5 +1,10 @@
 ---
-- name: Install nginx
-  package:
-    name: nginx
-    state: present
+- name: Install nginx on league
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install nginx
+      package:
+        name: nginx
+        state: present
