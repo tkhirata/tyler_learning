@@ -15,4 +15,4 @@ def uniqueSubstrings(string, k):
         k = k + 1
         i = i + 1
 
-uniqueSubstrings("Passw0rd", 4)
+uniqueSubstrings(")wQ[8]30QvRa", 7)
