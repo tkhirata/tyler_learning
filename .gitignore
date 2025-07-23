@@ -2,5 +2,5 @@
 *.idea
 projects/league_of_legends_leaderboard/vagrant/.vagrant/*
 projects/league_of_legends_leaderboard/terraform/.terraform/*
-projects/league_of_legends_leaderboard/terraform.tfstate
-projects/league_of_legends_leaderboard/terraform.tfstate.backup
+*tfstate
+*.tfstate.backup
