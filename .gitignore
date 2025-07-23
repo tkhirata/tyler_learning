@@ -1,3 +1,6 @@
 .terraform/*
 *.idea
-.projects/league_of_legends_leaderboard/vagrant/.vagrant/*
+projects/league_of_legends_leaderboard/vagrant/.vagrant/*
+projects/league_of_legends_leaderboard/terraform/.terraform/*
+*tfstate
+*.tfstate.backup
