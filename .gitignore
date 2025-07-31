@@ -4,6 +4,7 @@ projects/league_of_legends_leaderboard/vagrant/.vagrant/*
 projects/league_of_legends_leaderboard/terraform/.terraform/*
 terraform/create_an_ec2_instance/terraform/.terraform/*
 terraform/create_a_configurable_webserver/terraform/.terraform/*
+terraform/deploy_cluster_of_web_servers/terraform/.terraform/*
 *tfstate
 *.tfstate.backup
 terraform/create_a_web_server/terraform/.terraform/*

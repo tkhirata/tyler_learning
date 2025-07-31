@@ -27,12 +27,12 @@ resource "aws_instance" "ConfigurableWebserver" {
 
 
   tags = {
-    Name = "ConfigurableWebserver"
+    Name = "ClusterWebserver"
   }
 }
 
 resource "aws_security_group" "instance" {
-  name = "terraform-ConfigurableWebserver-example-instance"
+  name = "terraform-ClusterWebserver-example-instance"
 
   ingress{
     from_port = var.server_port
@@ -55,4 +55,34 @@ resource "aws_launch_configuration" "example" {
             echo "Hello, World" > index.html
             nohup busybox httpd -f -p ${var.server_port} &
             EOF
+
+  # Required when using a launch configuration with an auto scaling group.
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnets" "default" {
+  filter {
+    name = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+
+resource "aws_autoscaling_group" "example" {
+  launch_configuration = aws_launch_configuration.example.name
+  vpc_zone_identifier = data.aws_subnets.default.ids
+
+  min_size = 2
+  max_size = 10
+
+  tag {
+    key                 = "Name"
+    value               = "terraform-asg-example"
+    propagate_at_launch = true
+  }
 }
