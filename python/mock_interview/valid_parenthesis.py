@@ -10,6 +10,7 @@ def parenthesis (y):
         for character in characters:
             if character == ']':
                 characters.remove(character)
+
     # same loops, but removed append and changed first loop to reference list instead of function input
     for character in characters:
         if character == '(':
