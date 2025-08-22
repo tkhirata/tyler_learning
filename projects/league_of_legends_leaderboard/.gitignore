@@ -1,2 +1,3 @@
 .terraform
 .terraform.lock.hcl
+modules/secret-management/.terraform*

@@ -11,33 +11,14 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_instance" "LLLB-Webserver" {
-  ami           = var.ami
-  instance_type = var.instance_type
-  vpc_security_group_ids = [aws_security_group.instance.id]
-
-  user_data = <<-EOF
-            #!/bin/bash
-            echo "hi"
-            echo "Hello, World" > index.html
-            nohup busybox httpd -f -p ${var.server_port} &
-            EOF
-
-  user_data_replace_on_change = true
-
-
-  tags = {
-    Name = "LLLB"
-  }
+module "ec2"{
+  source = "./modules/ec2"
 }
 
-resource "aws_security_group" "instance" {
-  name = "terraform-LLLB-example-instance"
+module "SecurityGroups" {
+  source = "./modules/security_groups"
+}
 
-  ingress{
-    from_port = var.server_port
-    to_port   = var.server_port
-    protocol  = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+module "SecretManager" {
+  source = "./modules/secret-management"
 }
