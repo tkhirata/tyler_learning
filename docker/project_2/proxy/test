@@ -1,0 +1,20 @@
+let json = {"LoL": { "channel_id": "C08952NJHQB", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "TFT": { "channel_id": "C089U3NB90Q", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "VAL": {"channel_id": "C0897LLBTPW", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "LoR":  {"channel_id": "C0897QA57A8", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "WR": {"channel_id": "C0897Q92VDJ", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "2XKO": { "channel_id": "C089HRM8Z0R", "initial_message_timestamp": null,  "initial_slack_threaded_message_timestamp": null}, "all": {"channel_id": "C08BBFU6A5N", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "Offices": {"channel_id": "C08T8C0P3K2", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}, "Other": {"channel_id": "C08T8C0P3K2", "initial_message_timestamp": null, "initial_slack_threaded_message_timestamp": null, "initial_slack_message": false, "initial_slack_threaded_can": false}}
+
+return json
+
+
+Triggers: Active, Stable, Resolved. and changes to "incident_summary_sent" value.
+
+Triggered actions:
+
+@threaded_can_with_edit-copy
+@slack-nt-live-cans-all (in-progress comms)
+@slack-nt-live-cans-all (resolved comms)
+
+On initial run this workflow should post the initial message then sleep for 25 minutes. After sleeping for 25 minutes it will post the threaded CAN report as well as trigger another instance of this workflow to run.
+
+On the second and consecutive triggers of this workflow run the workflow will sleep for 30 minutes. After sleeping for 30 minutes it will initiate a get incident check to get the current status of the incident. It will then pass through a conditional that checks to see if the incident was resolved while the workflow was sleeping. If it was resolved the workflow will end. If it wasn't resolved it will go down the flow of updating the CAN report. While going down this flow another instance of the workflow should be triggered repeating this flow until the incident is resolved.
+
+When the incident is resolved the slack message will immediately be updated. Expected behavior is the the workflow that is sleeping once it completes that step should hit the get incident step to know that the incident is resolved while it was sleeping.
+
+Roll back to Sep 26th, 4:18
