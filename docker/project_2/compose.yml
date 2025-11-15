@@ -1,0 +1,10 @@
+services:
+  hello_app:
+    build: ./hello_app
+    ports:
+      - "8080"
+
+  proxy_app:
+    build: ./proxy
+    ports:
+      - "8081"
