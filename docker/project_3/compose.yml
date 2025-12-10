@@ -4,17 +4,12 @@ services:
     ports:
       - "8080"
 
-  proxy_app:
-    build: ./proxy
+  hello_app_response:
+    build: ./hello_app_response
     ports:
       - "8081"
 
-  webserver:
-    build: ./webserver
-    ports:
-     - "8082:80"
-
-  nginx:
-    build: ./nginx
+  reverse_proxy:
+    build: ./reverse_proxy
     ports:
      - "8083:80"
