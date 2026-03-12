@@ -1,7 +1,7 @@
 from bottle import route, run
 import requests
 
-@route('/hello/response')
+@route('/response')
 def response():
 
     hello_app_response = requests.get('http://hello_app:8080/hello')
