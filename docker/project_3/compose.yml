@@ -1,13 +1,9 @@
 services:
   hello_app:
     build: ./hello_app
-    ports:
-      - "8080"
 
   hello_app_response:
-    build: ./hello_app_response
-    ports:
-      - "8081"
+    build: ./response_app
 
   reverse_proxy:
     build: ./reverse_proxy
